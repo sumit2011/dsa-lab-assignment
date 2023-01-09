@@ -28,7 +28,7 @@ void insertAtBeg(int value)
         newnode->next = head;
         head = newnode;
     }
-    printf("\n\n*Inserted successfully at beginning*\n");
+    printf("%d is inserted at beginning.\n", value);
 }
 
 // insertation at end
@@ -53,7 +53,7 @@ void insertATend(int value)
         temp->next = newnode;
         newnode->next = NULL;
     }
-    printf("\n\n*Inserted Successfully in END *\n");
+    printf("%d is inserted at the end.\n", value);
 }
 
 // insertion at any position
@@ -73,33 +73,50 @@ void insertAtPos(int pos, int value)
     }
     newnode->next = temp->next;
     temp->next = newnode;
+    printf("%d is inserted at the %dth position.\n", value, pos);
 }
 
 // deletion at begining
-void deletatBeg()
+void deleteatBeg()
 {
-    struct Node *temp;
-    temp = head;
-    head = head->next;
-    free(temp);
+    if (head == NULL)
+    {
+        printf("The list is empty.\n");
+    }
+    else
+    {
+        struct Node *temp;
+        temp = head;
+        head = head->next;
+        printf("%d is deleted from the begining\n", temp->data);
+        free(temp);
+    }
 }
 
 // deletion at end
-void deletatEnd()
+void deleteatEnd()
 {
-    struct Node *temp, *prev;
-    prev = temp = head;
-    while (temp->next != NULL)
+    if (head == NULL)
     {
-        prev = temp;
-        temp = temp->next;
+        printf("The list is empty.\n");
     }
-    prev->next = NULL;
-    free(temp);
+    else
+    {
+        struct Node *temp, *prev;
+        prev = temp = head;
+        while (temp->next != NULL)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = NULL;
+        printf("%d is deleted from the end\n", temp->data);
+        free(temp);
+    }
 }
 
 // deletion at any position
-void deletatPos(int pos)
+void deleteatPos(int pos)
 {
     struct Node *nextnode, *temp;
     int i = 1;
@@ -111,6 +128,7 @@ void deletatPos(int pos)
         i++;
     }
     temp->next = nextnode->next;
+    printf("%d is deleted from the %dth position.\n", nextnode->data, pos);
     free(nextnode);
 }
 
@@ -135,8 +153,10 @@ void sortlist()
         }
         ptr = ptr->next;
     }
+    printf("The list is sorted successfully.\n");
 }
 
+// to reverse the list
 void reverse()
 {
     struct Node *current = head;
@@ -150,51 +170,44 @@ void reverse()
         current = next;
     }
     head = prev;
+    printf("The list is reversed successfully.\n");
 }
 
 // printing of linked list
-void print()
+void display()
 {
+    printf("The list is: ");
     struct Node *temp;
     temp = head;
     while (temp != NULL)
     {
-        printf("%d-->", temp->data);
+        printf("%d ", temp->data);
         temp = temp->next;
     }
-    printf("NULL");
+    printf("\n\n");
 }
 
 // length of the linked
 int getlength()
 {
-    int len = 0;
+    int count = 0;
     struct Node *temp = head;
     while (temp != NULL)
     {
-        len++;
+        count++;
         temp = temp->next;
     }
-    printf("%d", len);
+    printf("Total nodes present in the list is: %d\n", count);
 }
 
 // main function
 int main()
 {
-    // int a;
-    // printf("how many elements do you want enter= ");
-    // scanf("%d", &a);
-    // for (int i = 0; i < a; i++)
-    // {
-    //     int data;
-    //     scanf("%d", &data);
-    //     insertATend(data);
-    // }
-    // print();
+
     insertAtBeg(34);
     insertAtBeg(45);
     insertAtBeg(72);
-    insertAtBeg(5);
+    insertAtBeg(50);
     insertAtBeg(89);
     insertAtBeg(99);
     insertATend(23);
@@ -202,22 +215,102 @@ int main()
     insertATend(13);
     insertATend(41);
     insertAtPos(6, 8992);
-    print();
-    printf("\n");
-    deletatBeg();
-    deletatEnd();
-    deletatPos(3);
-    print();
-    printf("\n");
+    display();
+    deleteatBeg();
+    deleteatEnd();
+    deleteatPos(3);
+    display();
     sortlist();
-    print();
+    display();
     insertATend(58);
-    print();
-    printf("\n");
+    display();
     reverse();
-    print();
-    printf("\n\n");
-    printf("length: ");
+    display();
+    insertAtBeg(99);
+    insertATend(23);
+    display();
     getlength();
     return 0;
 }
+
+// int a;
+// printf("how many elements do you want enter= ");
+// scanf("%d", &a);
+// for (int i = 0; i < a; i++)
+// {
+//     int data;
+//     scanf("%d", &data);
+//     insertATend(data);
+// }
+// display();
+
+// int main()
+// {
+//     int choice,value,pos;
+
+//     printf("1) Insert at begining\n");
+//     printf("2) insert at last\n");
+//     printf("3) Insert at any position\n");
+//     printf("4) Delete from the begining\n");
+//     printf("5) Delete from the end\n");
+//     printf("6) Delete from any position\n");
+//     printf("7) Sort the list\n");
+//     printf("8) Reverse the list\n");
+//     printf("9) Fint the length of the list\n");
+//     printf("10) Display the list\n");
+//     printf("11) Exit\n");
+
+//     do
+//     {
+//         printf("Enter Choice: ");
+//         scanf("%d",&choice);
+//         switch (choice)
+//         {
+//         case 1:
+//             printf("Enter value to be inserted: ");
+//             scanf("%d",&value);
+//             insertAtBeg(value);
+//             break;
+//         case 2:
+//             printf("Enter value to be inserted: ");
+//             scanf("%d",&value);
+//             insertATend(value);
+//             break;
+//         case 3:
+//             printf("Enter the position and the value to be inserted respectively: ");
+//             scanf("%d%d",&pos,&value);
+//             insertAtPos(pos,value);
+//             break;
+//         case 4:
+//             deleteatBeg();
+//             break;
+//         case 5:
+//             deleteatEnd();
+//             break;
+//         case 6:
+//             printf("Enter the position of the node to be deleted: ");
+//             scanf("%d",&pos);
+//             deleteatPos(pos);
+//             break;
+//         case 7:
+//             sortlist();
+//             break;
+//         case 8:
+//             reverse();
+//             break;
+//         case 9:
+//             getlength();
+//             break;
+//         case 10:
+//             display();
+//             break;
+//         case 11:
+//             printf("Exit");
+//             break;
+//         default:
+//             break;
+//         }
+//     } while (choice!=11);
+
+//     return 0;
+// }
